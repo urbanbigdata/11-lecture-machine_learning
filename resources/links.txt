@@ -1,0 +1,135 @@
+Google What is machine learning?
+https://www.youtube.com/watch?v=HcqpanDadyQ
+
+MIT Intro to machine learning
+https://www.youtube.com/watch?v=h0e2HAPTGF4&t=2662s
+
+How to learn machine learning?
+https://www.youtube.com/watch?v=MOdlp1d0PNA
+
+Introduction to machine learning in R
+https://www.youtube.com/watch?v=32o0DnuRjfg
+
+Keras with Exploratory.io
+https://hk.saowen.com/a/997944a5f8ab926bbdd620af754f0e507323dc1ac609a0ed8970067b80892256
+
+
+MIT Linear Algebra Open Course
+https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/
+
+MIT Calculus Open Course
+
+MIT Stats and Probability Course
+
+
+
+
+
+
+
+Machine learning pipeline
+
+Find data
+
+Clean data 
+
+Choose and tune your algorithm
+
+Visualize results
+
+Google and stack overflow
+
+
+
+
+Six months?
+
+Learn the math (2 - 3 months)
+
+Learn the programming language (1 month)
+
+Machine learning tutorials and test projects (1 - 2 months)
+
+Short term passion projects (1+ month)
+
+
+
+You are going to fail a lot. It's software.. so who cares?
+
+Your models may not be predictive.
+That's a result. Null is just as good as non-null if you did it right.
+
+Learn GitHub and write up your results.
+
+
+
+Natural language processing
+Computational biology
+Computer vision
+Robotics
+
+Classification
+Labeled data
+
+Clustering 
+Without labeled data
+
+
+
+Machine learning is everywhere
+
+
+Almost every computer program learns something
+
+
+1959 
+
+All useful programs "learn something"
+
+Linear regression
+Computer code to fit the data point
+Computer starts to learn and predict behavior
+Program that can learn from experience
+
+Early definition of machine learning:
+
+Field of study that gives computers the ability to learn without being explicitly programmed.
+
+Arthur Samuel 1959
+
+Computer pioneer who wrote first self-learning program that plays checkers
+Invented alpha-beta pruning, widely used in decision tree algorithms
+
+
+
+
+Why machine learning?
+
+Where is machine learning used?
+
+Where is machine learning going?
+
+
+
+Machine learning is using data to answer questions
+
+
+Training
+Using data
+
+
+Prediction
+Answer questions
+
+
+Data -> training -> model -> serve predictions -> answer questions
+
+
+
+
+
+
+
+
+
+
