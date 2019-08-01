@@ -1,0 +1,226 @@
+---
+title: "Urban Big Data Analytics - Lecture 11 Group Session: Machine Learning"
+author: "Andy Hong"
+date: "August 1, 2019"
+output:
+  html_document:
+    css: my_styles.css
+  pdf_document: default
+  word_document: default
+---
+
+## Instruction
+
+### 1. Synopsis
+The purpose of this group session is to build some basic **machine learning** models. <br> 
+
+In part one, we will first run the K-means clustering algorithm using the USArrests data.<br>
+In part two, we will use implement the Decision Tree and Random Forest algorithms using the Boston Housing data.<br>
+
+### 2. Part one - K-means clustering
+
+First, we will install the `factoextra` package to use the `kmeans()` function. We will also load other core packages, like ggplot, magrittr, and dplyr.
+
+```{r warning=FALSE, message=FALSE}
+
+# Set CRAN repository source
+options(repos="https://cran.rstudio.com")
+
+#Load packages
+install.packages("factoextra")
+library(factoextra)
+library(ggplot2)
+library(magrittr)
+library(dplyr)
+
+```
+
+Let's load the USArrests data. This data is included in R as default. This data contains 50 observations on 4 variables.
+
+**Murder** - numeric	Murder arrests (per 100,000) <br>
+**Assault**	- numeric	Assault arrests (per 100,000) <br>
+**UrbanPop**	- numeric	Percent urban population <br>
+**Rape** - numeric	Rape arrests (per 100,000) <br>
+
+```{r}
+#Load data
+data("USArrests")
+head(USArrests)
+
+```
+
+For the k-means to work, we will scale the data appropriately and run the k-means algorithm to cluster the data into four groups.
+
+```{r}
+# Scale the data
+df = scale(USArrests)
+
+# Compute K-means cluster
+result = kmeans(df, 4)
+
+# See cluster
+result$cluster
+```
+
+Let's use the `fviz_cluster` function to visualize the clustering result.
+
+```{r}
+# Visualize cluster
+fviz_cluster(result, data = df)
+```
+
+
+### 3. Part two - Decision trees, bagging, and random forest
+
+```{r warning=FALSE, message=FALSE}
+
+# Set CRAN repository source
+options(repos="https://cran.rstudio.com")
+
+# Install packages
+install.packages("MASS")
+install.packages("tree")
+install.packages("randomForest")
+
+# Load packages
+library(MASS)
+library(tree)
+library(randomForest)
+
+```
+
+
+In this example, we will use the Boston housing price dataset. We will use the median housing values in \$1000s. The dataset is part of the MASS package. Below are all the variables in the Boston dataset.
+
+```{r}
+
+# Variable description
+
+# crim - per capita crime rate by town.
+# zn - proportion of residential land zoned for lots over 25,000 sq.ft.
+# indus - proportion of non-retail business acres per town.
+# chas - Charles River dummy variable (= 1 if tract bounds river; 0 otherwise).
+# nox - nitrogen oxides concentration (parts per 10 million).
+# rm - average number of rooms per dwelling.
+# age - proportion of owner-occupied units built prior to 1940.
+# dis - weighted mean of distances to five Boston employment centres.
+# rad - index of accessibility to radial highways.
+# tax - full-value property-tax rate per \$10,000.
+# ptratio - pupil-teacher ratio by town.
+# black - 1000(Bk - 0.63)^2 where Bk is the proportion of blacks by town.
+# lstat - lower status of the population (percent).
+# medv - median value of owner-occupied homes in \$1000s.
+
+head(Boston)
+
+```
+
+<b>Decision tree model</b>
+First, we are going to build a decision tree model
+
+```{r}
+
+# Setting the seed so that we can replicate later
+set.seed(1)
+
+# Split training and test data sets, 60:30
+train = sample(1:nrow(Boston), nrow(Boston) * 0.6)
+test = Boston[-train, "medv"]
+
+# Decision tree
+tree.boston = tree(medv~., data=Boston, subset=train)
+
+# Calculate predicted y value (y hat) on the test data set
+yhat.tree = predict(tree.boston, newdata = Boston[-train, ])
+
+# Show the decision tree
+plot(tree.boston)
+text(tree.boston, pretty = 0)
+title(main = "Unpruned Classification Tree")
+
+# Calculate mean squared error (MSE)
+mean((yhat.tree - test)^2)
+
+# Cross-validation
+cv.boston = cv.tree(tree.boston)
+plot(cv.boston$size, cv.boston$dev/length(train), type = "b",
+     xlab = "Tree Size", ylab = "CV Root Mean Square Error")
+
+# Show summary of the decision tree model
+summary(tree.boston)
+
+```
+
+<br>
+<b>Bagging model</b>
+Now, we are going to build a bagging model.
+ 
+```{r}
+
+# Setting the seed so that we can replicate later
+set.seed(1)
+
+# Random forest (bagging, full predictors)
+bag.boston = randomForest(medv~., data=Boston, subset=train, mtry=13, importance=TRUE)
+
+# Calculate predicted y value (y hat) on the test data set
+yhat.bag = predict(bag.boston, newdata = Boston[-train, ])
+
+# Calculate mean squared error (MSE)
+mean((yhat.bag - test)^2)
+plot(bag.boston)
+
+# Show summary of the bagging model
+bag.boston
+
+# Draw the importance plot
+varImpPlot(bag.boston)
+
+```
+
+<br>
+<b>Random forest model</b>
+Finally, this is our random forest model.
+
+```{r}
+
+# Random forest (partial predictors, m = sqrt(p))
+set.seed(1)
+rf.boston = randomForest(medv~., data=Boston, subset=train, mtry=4, importance=TRUE)
+
+# Calculate predicted y value (y hat)
+yhat.rf = predict(rf.boston, newdata = Boston[-train, ])
+
+# Calculate mean squared error (MSE)
+mean((yhat.rf - test)^2)
+plot(rf.boston)
+
+# Draw the importance plot
+varImpPlot(rf.boston, main="Importance Score")
+
+# Show summary of the rf model
+rf.boston
+
+```
+
+
+## Work on your group project
+
+1. Use either Exploratory or R Studio to working on your group project. 
+
+2. Complete the result section of your report.
+
+3. Send your preliminary report to the course email (urbanbigdata2019@gmail.com). 
+  + <font color="red"><b>[IMPORTANT]</b></font> Please use the following email title format: <br>
+ `VSP BigData [lecture number] - [group number] - [presenter name]` <br>
+ ex), `VSP BigData Lecture 11 - Group 1 - Bill Gates` <br>
+ 
+ 
+<br><br><br>
+ 
+
+ 
+
+
+
+

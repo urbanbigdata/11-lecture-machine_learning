@@ -34,15 +34,15 @@
 					<h1>Urban Big Data Analytics</h1>
 					
 					<i>Lecture 11</i><br>
-					<i>Machine Learning + <br> Future of Urban Science</i><br><br>
+					<i>Machine Learning + <br> Future of Urban Data Science</i><br><br>
 					
-					<small>August 1, 2019<br><br>
+					<small>August 2, 2018<br><br>
 					
 					Instructor: <a href="http://andyhong.org" target="_blank">Andy Hong</a>, <i>PhD</i><br>
 					
-					Lead Urban Health Scientist<br>
-					The George Institute for Global Health<br>
-					University of Oxford
+					Postdoctoral Research and Teaching Fellow<br>
+					School of Population and Public Health<br>
+					University of British Columbia
 					</small>
 
 				</section>
@@ -140,69 +140,66 @@
 					
 				</section>
 				
+				<section>
+					<!-- Slide 10 -->	
+					<h2>K-Means Example</h2>
+					<small><a href="http://web.stanford.edu/class/ee103/visualizations/kmeans/kmeans.html" target="_blank">http://web.stanford.edu/class/ee103/visualizations/kmeans/kmeans.html</a></small>
+					<img src="images/k-means_interaction.png">
+					
+				</section>				
 				
-				
+				<section>
+						<h2>K-Means demo</h2>
+						<a href="https://urbanbigdata.github.io/11-lecture-machine_learning/group-session/GroupSession_11.html" target="_blank">Lecture 11 - Group Session Part 1</a>		
+				</section>
+
 				<section>
 				<!-- Slide 10 -->	
-				<h2>K-Means Example</h2>
-				<small><a href="http://web.stanford.edu/class/ee103/visualizations/kmeans/kmeans.html" target="_blank">http://web.stanford.edu/class/ee103/visualizations/kmeans/kmeans.html</a></small>
-				<img src="images/k-means_interaction.png">
-				
-				</section>
-				
-				<section>
-				<!-- Slide 11 -->	
-				<h2>K-Means Demo (1/4)</h2>
-				
-				<pre><code data-trim data-noescape>
-				#Load packages
-				#install.packages("factoextra")
-				library(factoextra)
-				library(ggplot2)
-				library(magrittr)
-				library(dplyr)
-				
-				</code></pre>
-				</section>
-				
-				<section>
-				<!-- Slide 12-->	
-				<h2>K-Means Demo (2/4)</h2>
-				
-				<pre><code data-trim data-noescape>
-				#Load data
-				data("USArrests")
-				head(USArrests)
+					<h2>Random Forest</h2>
+					<img src="images/bagging.jpeg" style="float: left; margin-right: 50px">
+					<ul style="display: block">
+						<li>A collection of decision trees</li>
+						<li>Uses Bootstrap Aggregation (Bagging)</li>
+						<li>Bagging: combine multiple ML algorithms to increase accuracy</li>
+					</ul>
+				</section>		
 
-				#Scale the data
-				df = scale(USArrests)
-				
-				</code></pre>
-				</section>
-				
 				<section>
-				<!-- Slide 13-->	
-				<h2>K-Means Demo (3/4)</h2>
-				
-				<pre><code data-trim data-noescape>
-				#Compute K-means cluster
-				result = kmeans(df, 4)
+					<!-- Slide 10 -->	
+					<h2>What is A Decision Tree?</h2>
+					<img width="800px" src="images/decision.png">	
+				</section>
 
-				#See cluster
-				result$cluster
-				
-				</code></pre>
-				</section>
-				
 				<section>
-				<!-- Slide 14-->	
-				<h2>K-Means Demo (4/4)</h2>
-				
-				<pre><code data-trim data-noescape>
-				# Visualize cluster
-				fviz_cluster(result, data = df)
-				
-				</code></pre>
+						<!-- Slide 10 -->	
+						<h2>What is A Decision Tree?</h2>
+						<img width="800px" src="images/decision_tree_example.png">	
+				</section>
+
+				<section>
+					<!-- Slide 10 -->	
+					<h2>Bagging and Random Forest</h2>
+					<div style="background-color:white;color:rgb(24, 5, 5);padding:10px;opacity: 0.9;">
+						$$ \hat{f}_{bag}(x) =  \frac{1}{B} \sum_{b=1}^B \hat{f}^{*b}(x) $$
+					</div>
+					<ul>
+					<li><font color="orange">Bagging</font>: Take repeated samples from the training data set; calculate decision tree algorithm for each subset; and 
+						average all the predictions</li>
+					<li><font color="orange">Random Forest</font>: Instead of all predictors, take a random sample of <i>m</i> predictors, typically <font color="orange">$m \approx \sqrt p$</font> </li>
+					</ul>
+				</section>		
+
+				<section>
+					<!-- Slide 10 -->	
+					<h2>Random Forest</h2>
+					<img src="images/random_forest_example.png">	
+				</section>
+
+
+
+				<section>
+						<h2>Random forest demo</h2>
+						<a href="https://urbanbigdata.github.io/11-lecture-machine_learning/group-session/GroupSession_11.html" target="_blank">Lecture 11 - Group Session Part 2</a>	
 				</section>
 				
 				<!-- Slide 15 -->	
